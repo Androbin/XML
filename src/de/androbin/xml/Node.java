@@ -1,7 +1,6 @@
 package de.androbin.xml;
 
 import java.util.*;
-import jdk.nashorn.internal.objects.annotations.*;
 
 public final class Node
 {
@@ -91,7 +90,6 @@ public final class Node
 		return children;
 	}
 	
-	@ Getter
 	public String getMetadata( final String key )
 	{
 		return metadata.get( key );
