@@ -19,7 +19,7 @@ public final class State {
   
   public State( final String xml ) {
     chars = xml.toCharArray();
-    nodes = new LinkedList<Node>();
+    nodes = new LinkedList<>();
     nodes.addFirst( new Node() );
     builder = new StringBuilder();
     pointer = Pointer.BODY_CONTENT;

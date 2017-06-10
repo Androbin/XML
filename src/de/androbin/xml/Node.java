@@ -7,9 +7,9 @@ public final class Node {
   
   public final Node parent;
   public final String type;
-  private final Map<String, String> metadata = new HashMap<String, String>();
+  private final Map<String, String> metadata = new HashMap<>();
   public String content;
-  private final Set<Node> children = new HashSet<Node>();
+  private final Set<Node> children = new HashSet<>();
   
   public Node() {
     this( "root" );
@@ -61,7 +61,7 @@ public final class Node {
   }
   
   public Set<Node> getChildrenByType( final String type ) {
-    final Set<Node> children = new HashSet<Node>();
+    final Set<Node> children = new HashSet<>();
     
     for ( final Node child : children ) {
       if ( child.type.equals( type ) ) {
