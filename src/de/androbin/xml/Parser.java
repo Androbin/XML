@@ -15,27 +15,27 @@ public final class Parser {
       }
       
       switch ( state.pointer ) {
-        case HEAD_TYPE : {
+        case HEAD_TYPE: {
           parseHeadType( state, c );
           break;
         }
         
-        case HEAD_SPACE : {
+        case HEAD_SPACE: {
           parseHeadSpace( state, c );
           break;
         }
         
-        case HEAD_KEY : {
+        case HEAD_KEY: {
           parseHeadKey( state, c );
           break;
         }
         
-        case HEAD_VALUE : {
+        case HEAD_VALUE: {
           parseHeadValue( state, c );
           break;
         }
         
-        case BODY_CONTENT : {
+        case BODY_CONTENT: {
           if ( parseBodyContent( state, c ) ) {
             return state.nodes.peekFirst();
           }
@@ -52,19 +52,19 @@ public final class Parser {
     if ( c == '<' ) {
       if ( state.charIndex + 1 < state.chars.length ) {
         switch ( state.chars[ state.charIndex + 1 ] ) {
-          case '!' :
-          case '?' : {
+          case '!':
+          case '?': {
             state.meta = true;
             state.charIndex++;
           }
           
-          default : {
+          default: {
             state.pointer = Pointer.HEAD_TYPE;
             state.builder.setLength( 0 );
             break;
           }
           
-          case '/' : {
+          case '/': {
             return parseBodyContentClose( state, c );
           }
         }
@@ -122,17 +122,17 @@ public final class Parser {
   
   private static void parseHeadKey( final State state, final char c ) {
     switch ( c ) {
-      default : {
+      default: {
         state.builder.append( c );
         break;
       }
       
-      case '=' : {
+      case '=': {
         state.key = state.builder.toString();
         break;
       }
       
-      case '\"' : {
+      case '\"': {
         state.pointer = Pointer.HEAD_VALUE;
         state.builder.setLength( 0 );
         break;
@@ -142,18 +142,18 @@ public final class Parser {
   
   private static void parseHeadSpace( final State state, final char c ) {
     switch ( c ) {
-      default : {
+      default: {
         state.pointer = Pointer.HEAD_KEY;
         state.builder.setLength( 0 );
         state.builder.append( c );
         break;
       }
       
-      case ' ' : {
+      case ' ': {
         break;
       }
       
-      case '>' : {
+      case '>': {
         state.pointer = Pointer.BODY_CONTENT;
         state.builder.setLength( 0 );
         break;
@@ -171,16 +171,16 @@ public final class Parser {
       }
     } else {
       switch ( c ) {
-        default : {
+        default: {
           state.builder.append( c );
           break;
         }
         
-        case '>' : {
+        case '>': {
           state.charIndex--;
         }
         
-        case ' ' : {
+        case ' ': {
           final Node parent = state.nodes.peekFirst();
           final String type = state.builder.toString();
           final Node node = new Node( parent, type );
